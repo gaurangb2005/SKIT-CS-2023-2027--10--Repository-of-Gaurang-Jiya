@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker --version)",
+      "Bash(docker compose *)",
+      "Bash(flutter --version)",
+      "PowerShell(python --version)",
+      "PowerShell(py --version)",
+      "PowerShell(docker --version)",
+      "PowerShell(docker compose version)",
+      "PowerShell(flutter --version)",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "PowerShell(winget install --id Python.Python.3.12 -e --source winget --accept-package-agreements --accept-source-agreements)",
+      "PowerShell(winget install --id Docker.DockerDesktop -e --source winget --accept-package-agreements --accept-source-agreements)",
+      "PowerShell(wsl --status 2>&1)",
+      "PowerShell(wsl --list --verbose 2>&1)",
+      "PowerShell(Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux)",
+      "PowerShell(Get-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform)",
+      "PowerShell(& \"C:\\\\src\\\\flutter\\\\bin\\\\flutter.bat\" config --enable-web)",
+      "PowerShell(& \"C:\\\\src\\\\flutter\\\\bin\\\\flutter.bat\" doctor -v)",
+      "Read(//c/Users/Admin/AppData/Local/Pub/Cache/**)",
+      "Read(//c/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/**)",
+      "Read(//c/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth-5.7.0/**)",
+      "Read(//c/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth-5.7.0/lib/src/**)",
+      "PowerShell(docker --version 2>&1)",
+      "PowerShell(docker compose version 2>&1)",
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "PowerShell(gh --version)",
+      "PowerShell(gh auth status)",
+      "PowerShell(winget install --id GitHub.cli -e --source winget --accept-package-agreements --accept-source-agreements)"
+    ],
+    "additionalDirectories": [
+      "C:\\"
+    ]
+  }
+}
