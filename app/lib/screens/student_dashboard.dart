@@ -5,6 +5,7 @@ import '../services/api.dart';
 import '../services/token_storage.dart';
 import '../theme.dart';
 import '../widgets/learning_widgets.dart';
+import '../widgets/level_progress.dart';
 import '../widgets/responsive_shell.dart';
 import '../widgets/widgets.dart';
 
@@ -42,8 +43,6 @@ class _StudentDashboardState extends State<StudentDashboard> {
     );
   }
 }
-
-int _levelForXp(int xp) => (xp ~/ 100) + 1;
 
 int _totalXpFrom(List<dynamic> attempts) =>
     attempts.fold<int>(0, (sum, a) => sum + ((a['xp_earned'] as int?) ?? 0));
@@ -221,15 +220,7 @@ class _LearnTabState extends State<_LearnTab> {
         children: [
           Text('Hi, $_name 👋', style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: Spacing.lg),
-          AppCard(
-            child: Row(
-              children: [
-                XPBadge(xp: _totalXp),
-                const SizedBox(width: Spacing.md),
-                Text('Level ${_levelForXp(_totalXp)}'),
-              ],
-            ),
-          ),
+          LevelProgress(xp: _totalXp),
           const SizedBox(height: Spacing.xl),
           if (recent.isNotEmpty) ...[
             Text('Continue learning', style: Theme.of(context).textTheme.titleLarge),
@@ -419,18 +410,7 @@ class _ProfileTabState extends State<_ProfileTab> {
               child: Text(school, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade600)),
             ),
           const SizedBox(height: Spacing.lg),
-          Center(
-            child: AppCard(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  XPBadge(xp: totalXp),
-                  const SizedBox(width: Spacing.md),
-                  Text('Level ${_levelForXp(totalXp)}'),
-                ],
-              ),
-            ),
-          ),
+          LevelProgress(xp: totalXp),
           const SizedBox(height: Spacing.xl),
           PrimaryButton(label: 'Edit profile', onPressed: () => setState(() => _editing = true)),
           const SizedBox(height: Spacing.xl),
