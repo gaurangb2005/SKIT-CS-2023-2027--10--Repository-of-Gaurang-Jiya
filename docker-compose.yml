@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-rural_edu}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-rural_edu}
+      POSTGRES_DB: ${POSTGRES_DB:-rural_edu}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
