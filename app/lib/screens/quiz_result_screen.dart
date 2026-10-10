@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../theme.dart';
 import '../widgets/learning_widgets.dart';
+import '../widgets/quiz_stars.dart';
 import '../widgets/widgets.dart';
 
 class QuizResultScreen extends StatefulWidget {
@@ -24,13 +25,6 @@ class _QuizResultScreenState extends State<QuizResultScreen> with SingleTickerPr
     super.dispose();
   }
 
-  int _starsFor(double percentage) {
-    if (percentage >= 90) return 3;
-    if (percentage >= 60) return 2;
-    if (percentage > 0) return 1;
-    return 0;
-  }
-
   String _messageFor(double percentage) {
     if (percentage == 100) return 'Perfect score! Amazing work! 🎉';
     if (percentage >= 80) return 'Great job! Keep it up! 🌟';
@@ -45,7 +39,6 @@ class _QuizResultScreenState extends State<QuizResultScreen> with SingleTickerPr
     final percentage = (widget.result['percentage'] as num).toDouble();
     final xp = widget.result['xp_earned'] as int;
     final results = (widget.result['results'] as List).cast<Map<String, dynamic>>();
-    final stars = _starsFor(percentage);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Result'), automaticallyImplyLeading: false),
@@ -68,20 +61,7 @@ class _QuizResultScreenState extends State<QuizResultScreen> with SingleTickerPr
             const SizedBox(height: Spacing.lg),
             Center(child: Text('$percentage%', style: Theme.of(context).textTheme.displaySmall)),
             const SizedBox(height: Spacing.md),
-            Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(3, (i) {
-                  return TweenAnimationBuilder<double>(
-                    tween: Tween(begin: 0, end: i < stars ? 1.0 : 0.0),
-                    duration: Duration(milliseconds: 400 + i * 200),
-                    curve: Curves.elasticOut,
-                    builder: (context, value, child) =>
-                        Transform.scale(scale: value, child: const Icon(Icons.star_rounded, size: 40, color: AppColors.accent)),
-                  );
-                }),
-              ),
-            ),
+            Center(child: StarRating(stars: starsForPercentage(percentage), size: 40, animate: true)),
             const SizedBox(height: Spacing.md),
             Center(child: XPBadge(xp: xp)),
             const SizedBox(height: Spacing.lg),
