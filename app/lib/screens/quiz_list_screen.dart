@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../services/api.dart';
 import '../theme.dart';
 import '../widgets/learning_widgets.dart';
+import '../widgets/quiz_stars.dart';
 import '../widgets/widgets.dart';
 
 class QuizListScreen extends StatefulWidget {
@@ -90,7 +91,14 @@ class _QuizListScreenState extends State<QuizListScreen> {
                           ),
                         ),
                         if (best != null)
-                          Text('Best: ${best['score']}/${best['total']}', style: Theme.of(context).textTheme.bodyMedium)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              StarRating(stars: starsForScore(best['score'] as int, best['total'] as int), size: 18),
+                              Text('Best: ${best['score']}/${best['total']}', style: Theme.of(context).textTheme.bodyMedium),
+                            ],
+                          )
                         else
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: Spacing.sm, vertical: 2),
