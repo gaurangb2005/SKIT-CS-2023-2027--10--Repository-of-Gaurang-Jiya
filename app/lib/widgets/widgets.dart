@@ -106,20 +106,58 @@ class AppScaffold extends StatelessWidget {
   }
 }
 
-class AppCard extends StatelessWidget {
+class AppCard extends StatefulWidget {
   final Widget child;
   final EdgeInsetsGeometry padding;
   final VoidCallback? onTap;
 
-  const AppCard({super.key, required this.child, this.padding = const EdgeInsets.all(Spacing.lg), this.onTap});
+  const AppCard({
+    super.key,
+    required this.child,
+    this.padding = const EdgeInsets.all(Spacing.lg),
+    this.onTap,
+  });
+
+  @override
+  State<AppCard> createState() => _AppCardState();
+}
+
+class _AppCardState extends State<AppCard> {
+  bool _hovered = false;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(padding: padding, child: child),
+    final colorScheme = Theme.of(context).colorScheme;
+    return MouseRegion(
+      cursor: widget.onTap == null
+          ? MouseCursor.defer
+          : SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 160),
+        curve: Curves.easeOut,
+        decoration: BoxDecoration(
+          borderRadius: AppRadius.md,
+          boxShadow: _hovered
+              ? [
+                  BoxShadow(
+                    color: colorScheme.primary.withValues(alpha: 0.1),
+                    blurRadius: 16,
+                    offset: const Offset(0, 5),
+                  ),
+                ]
+              : const [],
+        ),
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: widget.onTap,
+            hoverColor: colorScheme.primary.withValues(alpha: 0.04),
+            splashColor: colorScheme.primary.withValues(alpha: 0.08),
+            child: Padding(padding: widget.padding, child: widget.child),
+          ),
+        ),
       ),
     );
   }
