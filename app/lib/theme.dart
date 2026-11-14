@@ -87,33 +87,100 @@ ThemeData _buildTheme() {
     cardTheme: CardThemeData(
       elevation: 0,
       color: Colors.white,
-      shape: const RoundedRectangleBorder(borderRadius: AppRadius.md),
+      surfaceTintColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: AppRadius.md,
+        side: BorderSide(
+          color: colorScheme.outlineVariant.withValues(alpha: 0.8),
+        ),
+      ),
       margin: EdgeInsets.zero,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
+        disabledBackgroundColor: colorScheme.surfaceContainerHighest,
+        disabledForegroundColor: colorScheme.onSurfaceVariant,
         minimumSize: const Size.fromHeight(48),
         padding: const EdgeInsets.symmetric(horizontal: Spacing.xl),
-        shape: const RoundedRectangleBorder(borderRadius: AppRadius.sm),
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.md),
         textStyle: textTheme.labelLarge,
+        elevation: 1,
+        overlayColor: colorScheme.onPrimary.withValues(alpha: 0.12),
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: colorScheme.primary,
+        backgroundColor: colorScheme.surface,
+        minimumSize: const Size.fromHeight(48),
+        padding: const EdgeInsets.symmetric(horizontal: Spacing.xl),
+        side: BorderSide(color: colorScheme.outline, width: 1.2),
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.md),
+        textStyle: textTheme.labelLarge,
+        overlayColor: colorScheme.primary.withValues(alpha: 0.08),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(minimumSize: const Size(48, 48), textStyle: textTheme.labelLarge),
+      style: TextButton.styleFrom(
+        foregroundColor: colorScheme.primary,
+        minimumSize: const Size(48, 48),
+        padding: const EdgeInsets.symmetric(horizontal: Spacing.md),
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.md),
+        textStyle: textTheme.labelLarge,
+        overlayColor: colorScheme.primary.withValues(alpha: 0.08),
+      ),
+    ),
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        foregroundColor: colorScheme.onSurfaceVariant,
+        minimumSize: const Size(44, 44),
+        padding: const EdgeInsets.all(Spacing.sm),
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.md),
+        hoverColor: colorScheme.primary.withValues(alpha: 0.08),
+        focusColor: colorScheme.primary.withValues(alpha: 0.12),
+        highlightColor: colorScheme.primary.withValues(alpha: 0.14),
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: AppColors.surfaceSoft,
-      contentPadding: const EdgeInsets.symmetric(horizontal: Spacing.lg, vertical: Spacing.lg),
-      border: const OutlineInputBorder(borderRadius: AppRadius.sm, borderSide: BorderSide.none),
-      enabledBorder: const OutlineInputBorder(borderRadius: AppRadius.sm, borderSide: BorderSide.none),
+      fillColor: colorScheme.surface,
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: Spacing.lg,
+        vertical: Spacing.lg,
+      ),
+      labelStyle: TextStyle(
+        color: colorScheme.onSurfaceVariant,
+        fontWeight: FontWeight.w600,
+      ),
+      floatingLabelStyle: TextStyle(
+        color: colorScheme.primary,
+        fontWeight: FontWeight.w700,
+      ),
+      border: OutlineInputBorder(
+        borderRadius: AppRadius.md,
+        borderSide: BorderSide(color: colorScheme.outlineVariant),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: AppRadius.md,
+        borderSide: BorderSide(color: colorScheme.outlineVariant, width: 1.2),
+      ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: AppRadius.sm,
+        borderRadius: AppRadius.md,
         borderSide: BorderSide(color: colorScheme.primary, width: 2),
       ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: AppRadius.md,
+        borderSide: BorderSide(color: colorScheme.error, width: 1.2),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: AppRadius.md,
+        borderSide: BorderSide(color: colorScheme.error, width: 2),
+      ),
     ),
+    hoverColor: colorScheme.primary.withValues(alpha: 0.06),
+    focusColor: colorScheme.primary.withValues(alpha: 0.1),
     navigationRailTheme: NavigationRailThemeData(
       backgroundColor: Colors.white,
       selectedIconTheme: IconThemeData(color: colorScheme.primary),
